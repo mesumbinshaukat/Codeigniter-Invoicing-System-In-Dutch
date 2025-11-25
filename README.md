@@ -152,7 +152,7 @@ app/
 ├── Services/
 │   └── PdfService.php
 ├── Helpers/
-│   └── OfferNumberHelper.php
+│   └── offer_number_helper.php
 ├── Config/
 │   ├── Routes.php
 │   └── FieldMapper.php
