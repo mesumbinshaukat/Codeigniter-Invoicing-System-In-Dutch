@@ -26,7 +26,7 @@
                         <td><strong><?= esc($offer['offer_number']) ?></strong></td>
                         <td><?= esc($offer['client_name']) ?></td>
                         <td><?= esc($offer['client_email']) ?></td>
-                        <td>€ <?= number_format($offer['total_amount'], 2, ',', '.') ?></td>
+                        <td>€ <?= number_format($offer['fixed_price'] ?? 0, 2, ',', '.') ?></td>
                         <td>
                             <span class="badge badge-<?= $offer['status'] == 'draft' ? 'warning' : ($offer['status'] == 'sent' ? 'info' : ($offer['status'] == 'accepted' ? 'success' : 'danger')) ?>">
                                 <?= ucfirst($offer['status']) ?>
