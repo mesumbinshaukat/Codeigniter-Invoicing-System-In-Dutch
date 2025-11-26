@@ -17,7 +17,7 @@ class OfferModel extends Model
         'client_postcode', 'client_city', 'client_email', 'client_phone',
         'project_address', 'building_type', 'research_area', 'research_purpose',
         'number_of_analyses', 'extra_options', 'subtotal', 'btw_percentage',
-        'btw_amount', 'total_amount', 'status', 'pdf_path'
+        'btw_amount', 'total_amount', 'status', 'pdf_path', 'fixed_price', 'tarief_description'
     ];
 
     protected bool $allowEmptyInserts = false;
@@ -53,15 +53,5 @@ class OfferModel extends Model
                     ->join('form_submissions', 'form_submissions.id = offers.submission_id')
                     ->where('offers.id', $id)
                     ->first();
-    }
-
-    public function getWithItems($id)
-    {
-        $offer = $this->find($id);
-        if ($offer) {
-            $itemModel = new OfferItemModel();
-            $offer['items'] = $itemModel->where('offer_id', $id)->findAll();
-        }
-        return $offer;
     }
 }

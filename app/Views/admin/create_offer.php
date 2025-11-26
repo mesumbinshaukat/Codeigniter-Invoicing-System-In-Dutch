@@ -8,7 +8,7 @@
 </div>
 
 <div class="form-card">
-    <form action="<?= base_url('admin/offer/store') ?>" method="post" id="offerForm">
+    <form action="<?= base_url('admin/offer/store') ?>" method="post">
         <?= csrf_field() ?>
         <input type="hidden" name="submission_id" value="<?= $submission['id'] ?>">
 
@@ -18,50 +18,37 @@
                 <p><strong>Naam:</strong> <?= esc($submission['naam']) ?></p>
                 <p><strong>E-mail:</strong> <?= esc($submission['email']) ?></p>
                 <p><strong>Telefoon:</strong> <?= esc($submission['telefoonnummer']) ?></p>
-                <p><strong>Adres:</strong> <?= esc($submission['adres']) ?>, <?= esc($submission['postcode']) ?> <?= esc($submission['woonplaats']) ?></p>
+                <p><strong>Postcode:</strong> <?= esc($submission['postcode']) ?></p>
+                <p><strong>Woonplaats:</strong> <?= esc($submission['woonplaats']) ?></p>
+                <?php if (!empty($submission['adres'])): ?>
+                <p><strong>Adres:</strong> <?= esc($submission['adres']) ?></p>
+                <?php endif ?>
             </div>
         </div>
 
         <div class="form-section">
-            <h3>Offerte Items</h3>
-            <div id="itemsContainer">
-                <div class="item-row">
-                    <div class="form-group">
-                        <label>Omschrijving</label>
-                        <input type="text" name="items[0][description]" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Aantal</label>
-                        <input type="number" name="items[0][quantity]" value="1" min="1" required class="item-quantity">
-                    </div>
-                    <div class="form-group">
-                        <label>Prijs per stuk (€)</label>
-                        <input type="number" name="items[0][unit_price]" step="0.01" min="0" required class="item-price">
-                    </div>
-                    <div class="form-group">
-                        <label>Totaal (€)</label>
-                        <input type="text" class="item-total" readonly>
-                    </div>
-                </div>
+            <h3>Projectinformatie</h3>
+            <div class="info-grid">
+                <p><strong>Project Adres:</strong> <?= esc($submission['project_adres']) ?></p>
+                <p><strong>Type Gebouw:</strong> <?= esc($submission['type_gebouw']) ?></p>
+                <?php if (!empty($submission['onderzoeksgebied'])): ?>
+                <p><strong>Onderzoeksgebied:</strong> <?= esc($submission['onderzoeksgebied']) ?></p>
+                <?php endif ?>
+                <p><strong>Doel Onderzoek:</strong> <?= nl2br(esc($submission['doel_onderzoek'])) ?></p>
             </div>
-            <button type="button" class="btn btn-secondary" onclick="addItem()">Item Toevoegen</button>
         </div>
 
         <div class="form-section">
-            <h3>Totalen</h3>
-            <div class="totals-grid">
-                <div class="total-row">
-                    <span>Subtotaal:</span>
-                    <span id="subtotal">€ 0.00</span>
-                </div>
-                <div class="total-row">
-                    <span>BTW (21%):</span>
-                    <span id="btw">€ 0.00</span>
-                </div>
-                <div class="total-row total-final">
-                    <span>Totaal:</span>
-                    <span id="total">€ 0.00</span>
-                </div>
+            <h3>Offerte Details</h3>
+            
+            <div class="form-group">
+                <label for="fixed_price">Vaste prijs (excl. BTW) *</label>
+                <input type="number" id="fixed_price" name="fixed_price" step="0.01" min="0" required placeholder="350.00">
+            </div>
+
+            <div class="form-group">
+                <label for="tarief_description">Omschrijving voor tariefstelling *</label>
+                <textarea id="tarief_description" name="tarief_description" rows="3" required placeholder="Inventarisatie van Garage ( zie punt 1 t/m 3 )*"></textarea>
             </div>
         </div>
 
@@ -70,71 +57,5 @@
         </div>
     </form>
 </div>
-
-<script>
-let itemCount = 1;
-
-function addItem() {
-    const container = document.getElementById('itemsContainer');
-    const newItem = document.createElement('div');
-    newItem.className = 'item-row';
-    newItem.innerHTML = `
-        <div class="form-group">
-            <label>Omschrijving</label>
-            <input type="text" name="items[${itemCount}][description]" required>
-        </div>
-        <div class="form-group">
-            <label>Aantal</label>
-            <input type="number" name="items[${itemCount}][quantity]" value="1" min="1" required class="item-quantity">
-        </div>
-        <div class="form-group">
-            <label>Prijs per stuk (€)</label>
-            <input type="number" name="items[${itemCount}][unit_price]" step="0.01" min="0" required class="item-price">
-        </div>
-        <div class="form-group">
-            <label>Totaal (€)</label>
-            <input type="text" class="item-total" readonly>
-        </div>
-        <button type="button" class="btn-remove" onclick="removeItem(this)">×</button>
-    `;
-    container.appendChild(newItem);
-    itemCount++;
-    attachCalculationListeners();
-}
-
-function removeItem(button) {
-    button.parentElement.remove();
-    calculateTotals();
-}
-
-function attachCalculationListeners() {
-    document.querySelectorAll('.item-quantity, .item-price').forEach(input => {
-        input.removeEventListener('input', calculateTotals);
-        input.addEventListener('input', calculateTotals);
-    });
-}
-
-function calculateTotals() {
-    let subtotal = 0;
-    
-    document.querySelectorAll('.item-row').forEach(row => {
-        const quantity = parseFloat(row.querySelector('.item-quantity').value) || 0;
-        const price = parseFloat(row.querySelector('.item-price').value) || 0;
-        const total = quantity * price;
-        
-        row.querySelector('.item-total').value = '€ ' + total.toFixed(2);
-        subtotal += total;
-    });
-    
-    const btw = subtotal * 0.21;
-    const total = subtotal + btw;
-    
-    document.getElementById('subtotal').textContent = '€ ' + subtotal.toFixed(2);
-    document.getElementById('btw').textContent = '€ ' + btw.toFixed(2);
-    document.getElementById('total').textContent = '€ ' + total.toFixed(2);
-}
-
-attachCalculationListeners();
-</script>
 
 <?= $this->endSection() ?>

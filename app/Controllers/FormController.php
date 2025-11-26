@@ -27,8 +27,6 @@ class FormController extends Controller
             'type_gebouw' => $this->request->getPost('type_gebouw'),
             'onderzoeksgebied' => $this->request->getPost('onderzoeksgebied'),
             'doel_onderzoek' => $this->request->getPost('doel_onderzoek'),
-            'aantal_analyses' => $this->request->getPost('aantal_analyses'),
-            'extra_opties' => $this->request->getPost('extra_opties'),
             'status' => 'pending',
         ];
 

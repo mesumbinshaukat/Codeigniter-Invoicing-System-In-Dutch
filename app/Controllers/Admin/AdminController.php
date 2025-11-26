@@ -80,7 +80,7 @@ class AdminController extends Controller
     {
         $offerModel = new OfferModel();
         
-        $offer = $offerModel->getWithItems($id);
+        $offer = $offerModel->find($id);
         
         if (!$offer) {
             return redirect()->to('/admin/offers')->with('error', 'Offerte niet gevonden');

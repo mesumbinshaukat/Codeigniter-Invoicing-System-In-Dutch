@@ -4,7 +4,6 @@ namespace App\Services;
 
 use Dompdf\Dompdf;
 use Dompdf\Options;
-use App\Config\FieldMapper;
 
 class PdfService
 {
@@ -22,12 +21,21 @@ class PdfService
 
     public function generateOfferPdf($offer)
     {
-        $staticFields = FieldMapper::getStaticFields();
-        
-        $data = array_merge($offer, $staticFields, [
-            'offer_date' => date('d-m-Y'),
-            'logo_path' => FCPATH . 'uploads/logo/company-logo.png',
-        ]);
+        $data = [
+            'offer_number' => $offer['offer_number'],
+            'client_name' => $offer['client_name'],
+            'client_address' => $offer['client_address'] ?? '',
+            'client_postcode' => $offer['client_postcode'],
+            'client_city' => $offer['client_city'],
+            'client_email' => $offer['client_email'],
+            'client_phone' => $offer['client_phone'],
+            'project_address' => $offer['project_address'],
+            'building_type' => $offer['building_type'],
+            'research_area' => $offer['research_area'] ?? '',
+            'research_purpose' => $offer['research_purpose'],
+            'fixed_price' => $offer['fixed_price'],
+            'tarief_description' => $offer['tarief_description'],
+        ];
 
         $html = view('pdf/offer_template', $data);
 
@@ -50,12 +58,21 @@ class PdfService
 
     public function streamPdf($offer)
     {
-        $staticFields = FieldMapper::getStaticFields();
-        
-        $data = array_merge($offer, $staticFields, [
-            'offer_date' => date('d-m-Y'),
-            'logo_path' => FCPATH . 'uploads/logo/company-logo.png',
-        ]);
+        $data = [
+            'offer_number' => $offer['offer_number'],
+            'client_name' => $offer['client_name'],
+            'client_address' => $offer['client_address'] ?? '',
+            'client_postcode' => $offer['client_postcode'],
+            'client_city' => $offer['client_city'],
+            'client_email' => $offer['client_email'],
+            'client_phone' => $offer['client_phone'],
+            'project_address' => $offer['project_address'],
+            'building_type' => $offer['building_type'],
+            'research_area' => $offer['research_area'] ?? '',
+            'research_purpose' => $offer['research_purpose'],
+            'fixed_price' => $offer['fixed_price'],
+            'tarief_description' => $offer['tarief_description'],
+        ];
 
         $html = view('pdf/offer_template', $data);
 

@@ -5,352 +5,384 @@
     <title>Offerte <?= $offer_number ?></title>
     <style>
         @page {
-            margin: 20mm 15mm;
+            margin: 15mm 20mm;
         }
         
         body {
             font-family: 'DejaVu Sans', Arial, sans-serif;
             font-size: 10pt;
-            line-height: 1.4;
+            line-height: 1.5;
             color: #000;
         }
         
+        .page-break {
+            page-break-after: always;
+        }
+        
         .header {
-            margin-bottom: 30px;
-            position: relative;
-        }
-        
-        .logo {
-            position: absolute;
-            top: 0;
-            right: 0;
-            max-width: 150px;
-            max-height: 80px;
-        }
-        
-        .company-info {
-            font-size: 9pt;
-            line-height: 1.3;
-        }
-        
-        .company-name {
-            font-size: 14pt;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-        
-        .document-title {
-            font-size: 18pt;
-            font-weight: bold;
-            margin: 30px 0 20px 0;
-            text-transform: uppercase;
-        }
-        
-        .info-section {
-            margin-bottom: 25px;
-        }
-        
-        .info-row {
-            display: table;
-            width: 100%;
             margin-bottom: 20px;
         }
         
-        .info-column {
-            display: table-cell;
-            width: 50%;
-            vertical-align: top;
+        .logo {
+            float: left;
+            max-width: 120px;
+            max-height: 60px;
         }
         
-        .info-block {
+        .company-info {
+            float: right;
+            text-align: right;
+            font-size: 9pt;
+            line-height: 1.4;
+        }
+        
+        .clear {
+            clear: both;
+        }
+        
+        .client-address {
+            margin-top: 30px;
+            margin-bottom: 20px;
+            font-size: 10pt;
+        }
+        
+        .offer-header {
+            text-align: right;
+            margin-bottom: 30px;
+            font-size: 10pt;
+        }
+        
+        .greeting {
             margin-bottom: 15px;
         }
         
-        .info-label {
-            font-weight: bold;
-            font-size: 9pt;
-            margin-bottom: 3px;
+        .content-section {
+            margin-bottom: 15px;
+            line-height: 1.6;
         }
         
-        .info-value {
-            font-size: 10pt;
-            margin-bottom: 2px;
-        }
-        
-        table.items-table {
-            width: 100%;
-            border-collapse: collapse;
+        .project-details {
             margin: 20px 0;
         }
         
-        table.items-table th {
-            background-color: #f0f0f0;
-            padding: 8px;
-            text-align: left;
-            font-weight: bold;
-            border: 1px solid #ccc;
-            font-size: 9pt;
-        }
-        
-        table.items-table td {
-            padding: 8px;
-            border: 1px solid #ccc;
-            font-size: 9pt;
-        }
-        
-        table.items-table td.number {
-            text-align: right;
-        }
-        
-        table.items-table td.center {
-            text-align: center;
-        }
-        
-        .totals-table {
-            width: 50%;
-            margin-left: auto;
-            margin-top: 15px;
-        }
-        
-        .totals-table td {
-            padding: 5px 10px;
-            font-size: 10pt;
-        }
-        
-        .totals-table td.label {
-            text-align: right;
-            font-weight: bold;
-        }
-        
-        .totals-table td.amount {
-            text-align: right;
-            width: 120px;
-        }
-        
-        .totals-table tr.total-row {
-            border-top: 2px solid #000;
-            font-weight: bold;
-            font-size: 11pt;
-        }
-        
-        .footer-info {
-            margin-top: 30px;
-            font-size: 9pt;
-            line-height: 1.5;
-        }
-        
-        .footer-info p {
+        .project-details p {
             margin: 5px 0;
         }
         
-        .footer-info strong {
+        .price-line {
+            margin: 20px 0;
             font-weight: bold;
         }
         
-        .page-number {
-            position: fixed;
-            bottom: 10mm;
-            right: 15mm;
+        .footnote {
             font-size: 9pt;
-            color: #666;
+            font-style: italic;
+            margin: 10px 0;
         }
         
-        .terms-section {
-            margin-top: 25px;
-            page-break-before: auto;
-        }
-        
-        .terms-section h3 {
-            font-size: 11pt;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-        
-        .terms-section p {
-            font-size: 9pt;
-            margin-bottom: 8px;
-            line-height: 1.5;
+        .closing {
+            margin-top: 30px;
+            line-height: 1.6;
         }
         
         .signature-section {
-            margin-top: 40px;
-        }
-        
-        .signature-block {
-            display: inline-block;
-            width: 45%;
-            margin-top: 30px;
+            margin-top: 50px;
         }
         
         .signature-line {
             border-top: 1px solid #000;
-            margin-top: 50px;
+            width: 200px;
+            margin-top: 60px;
             padding-top: 5px;
             font-size: 9pt;
+        }
+        
+        .footer {
+            position: fixed;
+            bottom: 10mm;
+            left: 20mm;
+            right: 20mm;
+            font-size: 9pt;
+        }
+        
+        .footer-left {
+            float: left;
+        }
+        
+        .footer-right {
+            float: right;
+        }
+        
+        h3 {
+            font-size: 11pt;
+            margin: 20px 0 10px 0;
+        }
+        
+        .work-description {
+            margin: 15px 0;
+        }
+        
+        .work-description ol {
+            margin-left: 20px;
+        }
+        
+        .work-description li {
+            margin: 8px 0;
+            line-height: 1.6;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        
+        table th {
+            background-color: #f0f0f0;
+            padding: 8px;
+            text-align: left;
+            font-weight: bold;
+            border: 1px solid #000;
+            font-size: 9pt;
+        }
+        
+        table td {
+            padding: 8px;
+            border: 1px solid #000;
+            font-size: 9pt;
+        }
+        
+        table td.right {
+            text-align: right;
+        }
+        
+        .conditions-section {
+            margin-top: 20px;
+        }
+        
+        .conditions-section p {
+            margin: 8px 0;
+            line-height: 1.6;
         }
     </style>
 </head>
 <body>
     <div class="header">
-        <?php if (file_exists($logo_path ?? '')): ?>
-            <img src="<?= $logo_path ?>" alt="Logo" class="logo">
+        <?php if (file_exists(FCPATH . 'uploads/logo/aenm-logo.png')): ?>
+            <img src="<?= FCPATH . 'uploads/logo/aenm-logo.png' ?>" alt="Logo" class="logo">
         <?php endif ?>
-        
         <div class="company-info">
-            <div class="company-name"><?= $company_name ?></div>
-            <div><?= $company_address ?></div>
-            <div><?= $company_postcode ?> <?= $company_city ?></div>
-            <div>Tel: <?= $company_phone ?></div>
-            <div>E-mail: <?= $company_email ?></div>
-            <div><?= $company_kvk ?></div>
-            <div><?= $company_btw ?></div>
+            Kerkstraat 41<br>
+            5101 BB Dongen<br>
+            T 0162 - 764 024<br>
+            E info@aenmbv.nl<br>
+            W www.aenmbv.nl<br>
+            KvK 53156145<br>
+            BTW nr NL 850771870B01<br>
+            Van Lanschot 22 74 07 253
         </div>
+        <div class="clear"></div>
     </div>
 
-    <div class="document-title">OFFERTE</div>
-
-    <div class="info-section">
-        <div class="info-row">
-            <div class="info-column">
-                <div class="info-block">
-                    <div class="info-label">Offertenummer:</div>
-                    <div class="info-value"><?= $offer_number ?></div>
-                </div>
-                <div class="info-block">
-                    <div class="info-label">Datum:</div>
-                    <div class="info-value"><?= $offer_date ?></div>
-                </div>
-                <div class="info-block">
-                    <div class="info-label">Geldig tot:</div>
-                    <div class="info-value"><?= date('d-m-Y', strtotime('+30 days')) ?></div>
-                </div>
-            </div>
-            
-            <div class="info-column">
-                <div class="info-block">
-                    <div class="info-label">Klant:</div>
-                    <div class="info-value"><?= esc($client_name) ?></div>
-                    <div class="info-value"><?= esc($client_address) ?></div>
-                    <div class="info-value"><?= esc($client_postcode) ?> <?= esc($client_city) ?></div>
-                    <div class="info-value"><?= esc($client_email) ?></div>
-                    <div class="info-value"><?= esc($client_phone) ?></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="info-section">
-        <div class="info-block">
-            <div class="info-label">Project Adres:</div>
-            <div class="info-value"><?= esc($project_address) ?></div>
-        </div>
-        
-        <div class="info-block">
-            <div class="info-label">Type Gebouw:</div>
-            <div class="info-value"><?= esc($building_type) ?></div>
-        </div>
-        
-        <div class="info-block">
-            <div class="info-label">Onderzoeksgebied:</div>
-            <div class="info-value"><?= nl2br(esc($research_area)) ?></div>
-        </div>
-        
-        <div class="info-block">
-            <div class="info-label">Doel van Onderzoek:</div>
-            <div class="info-value"><?= nl2br(esc($research_purpose)) ?></div>
-        </div>
-        
-        <div class="info-block">
-            <div class="info-label">Aantal Analyses:</div>
-            <div class="info-value"><?= $number_of_analyses ?></div>
-        </div>
-        
-        <?php if (!empty($extra_options)): ?>
-        <div class="info-block">
-            <div class="info-label">Extra Opties:</div>
-            <div class="info-value"><?= nl2br(esc($extra_options)) ?></div>
-        </div>
+    <div class="client-address">
+        <?= esc($client_name) ?><br>
+        <?php if (!empty($client_address)): ?>
+        <?= esc($client_address) ?><br>
         <?php endif ?>
+        <?= esc($client_postcode) ?> <?= esc($client_city) ?><br>
+        <?= esc($client_email) ?><br>
+        <?= esc($client_phone) ?>
     </div>
 
-    <table class="items-table">
-        <thead>
-            <tr>
-                <th style="width: 50%;">Omschrijving</th>
-                <th style="width: 15%;" class="center">Aantal</th>
-                <th style="width: 17%;" class="number">Prijs per stuk</th>
-                <th style="width: 18%;" class="number">Totaal</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php if (!empty($items)): ?>
-                <?php foreach ($items as $item): ?>
-                <tr>
-                    <td><?= esc($item['description']) ?></td>
-                    <td class="center"><?= $item['quantity'] ?></td>
-                    <td class="number">€ <?= number_format($item['unit_price'], 2, ',', '.') ?></td>
-                    <td class="number">€ <?= number_format($item['total_price'], 2, ',', '.') ?></td>
-                </tr>
-                <?php endforeach ?>
-            <?php endif ?>
-        </tbody>
-    </table>
-
-    <table class="totals-table">
-        <tr>
-            <td class="label">Subtotaal:</td>
-            <td class="amount">€ <?= number_format($subtotal, 2, ',', '.') ?></td>
-        </tr>
-        <tr>
-            <td class="label">BTW (<?= number_format($btw_percentage, 0) ?>%):</td>
-            <td class="amount">€ <?= number_format($btw_amount, 2, ',', '.') ?></td>
-        </tr>
-        <tr class="total-row">
-            <td class="label">Totaal:</td>
-            <td class="amount">€ <?= number_format($total_amount, 2, ',', '.') ?></td>
-        </tr>
-    </table>
-
-    <div class="footer-info">
-        <p><strong>Betalingsvoorwaarden:</strong> Betaling binnen <?= $payment_terms ?> na factuurdatum.</p>
-        <p><strong>IBAN:</strong> <?= $company_iban ?></p>
-        <p><strong>Geldigheid offerte:</strong> Deze offerte is geldig tot <?= date('d-m-Y', strtotime('+30 days')) ?>.</p>
+    <div class="offer-header">
+        Offertenummer : <?= $offer_number ?><br>
+        Dongen, <?= date('d-m-Y') ?>
     </div>
 
-    <div class="terms-section">
-        <h3>Algemene Voorwaarden</h3>
-        <p>1. Deze offerte is vrijblijvend en geldig gedurende <?= $validity_period ?>.</p>
-        <p>2. Alle prijzen zijn exclusief BTW, tenzij anders vermeld.</p>
-        <p>3. Betaling dient te geschieden binnen <?= $payment_terms ?> na factuurdatum.</p>
-        <p>4. Bij niet tijdige betaling zijn wij gerechtigd rente in rekening te brengen.</p>
-        <p>5. Op alle werkzaamheden zijn onze algemene voorwaarden van toepassing.</p>
+    <div class="greeting">
+        Beste <?= esc($client_name) ?>,
+    </div>
+
+    <div class="content-section">
+        Naar aanleiding van ons telefoongesprek zend ik u hierbij een offerte voor het uitvoeren van een asbestinventarisatie gelegen aan de <?= esc($project_address) ?> te <?= esc($client_city) ?>.
+    </div>
+
+    <div class="project-details">
+        <p><strong>Projectgegevens</strong></p>
+        <p>Adres : <?= esc($project_address) ?> te <?= esc($client_city) ?>.</p>
+        <p>Type gebouw : <?= esc($building_type) ?></p>
+        <?php if (!empty($research_area)): ?>
+        <p>Onderzoeksgebied : <?= esc($research_area) ?></p>
+        <?php endif ?>
+        <p>Doel onderzoek : <?= esc($research_purpose) ?></p>
+    </div>
+
+    <div class="content-section">
+        Het totale onderzoek van bovengenoemde complex wordt u aangeboden voor:
+    </div>
+
+    <div class="price-line">
+        € <?= number_format($fixed_price, 2, ',', '') ?>,00 excl. 21% BTW, incl. 100 analyses conform NEN 5896 en rapportage*
+    </div>
+
+    <div class="footnote">
+        *Specificaties en eventuele verrekentarieven zijn op pagina 2 in de offerte te vinden.
+    </div>
+
+    <div class="closing">
+        Op deze aanbieding zijn onze algemene leveringsvoorwaarden van toepassing. Ik hoop u hiermee voldoende te hebben geïnformeerd, indien u vragen heeft betreffende deze offerte kunt mij telefonisch bereiken op telefoonnummer 0162 - 764 024.
+    </div>
+
+    <div class="closing">
+        Met vriendelijke groet,<br>
+        Asbestinventarisatie en Milieuadvies B.V.
     </div>
 
     <div class="signature-section">
-        <div class="signature-block">
-            <div class="signature-line">
-                Datum en handtekening opdrachtgever
-            </div>
-        </div>
-        <div class="signature-block" style="float: right;">
-            <div class="signature-line">
-                Datum en handtekening opdrachtnemer
-            </div>
+        <div class="signature-line">
+            <?= esc($client_name) ?>
         </div>
     </div>
 
-    <script type="text/php">
-        if (isset($pdf)) {
-            $text = "Pagina {PAGE_NUM} van {PAGE_COUNT}";
-            $font = $fontMetrics->get_font("DejaVu Sans", "normal");
-            $size = 9;
-            $pageWidth = $pdf->get_width();
-            $pageHeight = $pdf->get_height();
-            $textWidth = $fontMetrics->get_text_width($text, $font, $size);
-            $x = $pageWidth - $textWidth - 40;
-            $y = $pageHeight - 30;
-            $pdf->text($x, $y, $text, $font, $size);
-        }
-    </script>
+    <div class="footer">
+        <div class="footer-left">Offertenummer <?= $offer_number ?></div>
+        <div class="footer-right">Pagina 1 van 3</div>
+        <div class="clear"></div>
+    </div>
+
+    <div class="page-break"></div>
+
+    <div class="header">
+        <?php if (file_exists(FCPATH . 'uploads/logo/aenm-logo.png')): ?>
+            <img src="<?= FCPATH . 'uploads/logo/aenm-logo.png' ?>" alt="Logo" class="logo">
+        <?php endif ?>
+        <div class="company-info">
+            Kerkstraat 41<br>
+            5101 BB Dongen<br>
+            T 0162 - 764 024<br>
+            E info@aenmbv.nl<br>
+            W www.aenmbv.nl<br>
+            KvK 53156145<br>
+            BTW nr NL 850771870B01<br>
+            Van Lanschot 22 74 07 253
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <h3>Omschrijving werkzaamheden</h3>
+
+    <div class="work-description">
+        <ol>
+            <li>Het inventariseren van asbest en asbesthoudende materialen in het gebouw conform NEN 2991 en NEN 2990.</li>
+            <li>Het nemen van monsters en het laten analyseren van deze monsters door een geaccrediteerd laboratorium conform NEN 5896.</li>
+            <li>Het opstellen van een asbestinventarisatierapport conform NEN 2991 en NEN 2990.</li>
+        </ol>
+    </div>
+
+    <h3>Tariefstelling</h3>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Omschrijving werkzaamheden</th>
+                <th style="width: 200px;">Prijzen excl. 21% BTW</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><?= esc($tarief_description) ?></td>
+                <td class="right">€ <?= number_format($fixed_price, 2, ',', '') ?>,00</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="footnote">
+        * Inbegrepen het nemen van monster incl. 100 analyses conform NEN 5896
+    </div>
+
+    <h3>Verrekentarieven</h3>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Omschrijving werkzaamheden</th>
+                <th style="width: 200px;">Prijzen excl. 21% BTW</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Eventueel extra monster nemen incl. analyse conform NEN 5896 per stuk</td>
+                <td class="right">€ 950,00</td>
+            </tr>
+            <tr>
+                <td>EXTRA 1</td>
+                <td class="right">€ 1,00</td>
+            </tr>
+            <tr>
+                <td>EXTRA 2</td>
+                <td class="right">€ 2,00</td>
+            </tr>
+            <tr>
+                <td>EXTRA 3</td>
+                <td class="right">€ 3,00</td>
+            </tr>
+            <tr>
+                <td>EXTRA 4</td>
+                <td class="right">€ 4,00</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="content-section">
+        Bovengenoemde tarieven zijn exclusief 21% BTW. De aanbieding is tot 2 maanden na datering geldig. Uitvoering en analyse zijn onder voorbehoud van wijzigingen in de wet-en regelgeving.
+    </div>
+
+    <div class="footer">
+        <div class="footer-right">Pagina 2 van 3</div>
+        <div class="clear"></div>
+    </div>
+
+    <div class="page-break"></div>
+
+    <div class="header">
+        <?php if (file_exists(FCPATH . 'uploads/logo/aenm-logo.png')): ?>
+            <img src="<?= FCPATH . 'uploads/logo/aenm-logo.png' ?>" alt="Logo" class="logo">
+        <?php endif ?>
+        <div class="company-info">
+            Kerkstraat 41<br>
+            5101 BB Dongen<br>
+            T 0162 - 764 024<br>
+            E info@aenmbv.nl<br>
+            W www.aenmbv.nl<br>
+            KvK 53156145<br>
+            BTW nr NL 850771870B01<br>
+            Van Lanschot 22 74 07 253
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <h3>Algemene Voorwaarden</h3>
+
+    <div class="conditions-section">
+        <p><strong>1. Algemeen</strong></p>
+        <p>Deze algemene voorwaarden zijn van toepassing op alle aanbiedingen, offertes en overeenkomsten van Asbestinventarisatie en Milieuadvies B.V., hierna te noemen: opdrachtnemer.</p>
+
+        <p><strong>2. Offertes en aanbiedingen</strong></p>
+        <p>Alle offertes en aanbiedingen van opdrachtnemer zijn vrijblijvend, tenzij schriftelijk anders is overeengekomen. Een offerte vervalt indien het product waarop de offerte betrekking heeft in de tussentijd niet meer beschikbaar is.</p>
+
+        <p><strong>3. Prijzen</strong></p>
+        <p>Alle prijzen die opdrachtnemer hanteert zijn in euro's, zijn exclusief BTW en exclusief eventuele andere heffingen van overheidswege, tenzij anders vermeld.</p>
+
+        <p><strong>4. Betaling</strong></p>
+        <p>Betaling dient te geschieden binnen 14 dagen na factuurdatum, tenzij schriftelijk anders is overeengekomen. Bij niet tijdige betaling is de opdrachtgever van rechtswege in verzuim. De opdrachtgever is alsdan een rente verschuldigd van 1% per maand, tenzij de wettelijke rente hoger is, in welk geval de wettelijke rente verschuldigd is.</p>
+
+        <p><strong>5. Aansprakelijkheid</strong></p>
+        <p>Opdrachtnemer is niet aansprakelijk voor schade, van welke aard ook, ontstaan doordat opdrachtnemer is uitgegaan van door of namens de opdrachtgever verstrekte onjuiste en/of onvolledige gegevens. Indien opdrachtnemer aansprakelijk mocht zijn voor enigerlei schade, dan is de aansprakelijkheid van opdrachtnemer beperkt tot maximaal het factuurbedrag.</p>
+    </div>
+
+    <div class="footer">
+        <div class="footer-right">Pagina 3 van 3</div>
+        <div class="clear"></div>
+    </div>
 </body>
 </html>

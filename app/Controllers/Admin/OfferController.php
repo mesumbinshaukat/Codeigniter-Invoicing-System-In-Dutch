@@ -41,7 +41,6 @@ class OfferController extends Controller
     public function store()
     {
         $offerModel = new OfferModel();
-        $offerItemModel = new OfferItemModel();
         $submissionModel = new FormSubmissionModel();
 
         $submissionId = $this->request->getPost('submission_id');
@@ -53,16 +52,8 @@ class OfferController extends Controller
 
         $offerNumber = generateOfferNumber();
 
-        $items = $this->request->getPost('items');
-        $subtotal = 0;
-
-        foreach ($items as $item) {
-            $subtotal += $item['quantity'] * $item['unit_price'];
-        }
-
-        $btwPercentage = 21.00;
-        $btwAmount = $subtotal * ($btwPercentage / 100);
-        $totalAmount = $subtotal + $btwAmount;
+        $fixedPrice = $this->request->getPost('fixed_price');
+        $tariefDescription = $this->request->getPost('tarief_description');
 
         $offerData = [
             'offer_number' => $offerNumber,
@@ -75,33 +66,17 @@ class OfferController extends Controller
             'client_phone' => $submission['telefoonnummer'],
             'project_address' => $submission['project_adres'],
             'building_type' => $submission['type_gebouw'],
-            'research_area' => $submission['onderzoeksgebied'],
+            'research_area' => $submission['onderzoeksgebied'] ?? '',
             'research_purpose' => $submission['doel_onderzoek'],
-            'number_of_analyses' => $submission['aantal_analyses'],
-            'extra_options' => $submission['extra_opties'],
-            'subtotal' => $subtotal,
-            'btw_percentage' => $btwPercentage,
-            'btw_amount' => $btwAmount,
-            'total_amount' => $totalAmount,
+            'fixed_price' => $fixedPrice,
+            'tarief_description' => $tariefDescription,
             'status' => 'draft',
         ];
 
         $offerId = $offerModel->insert($offerData);
 
         if ($offerId) {
-            foreach ($items as $item) {
-                $itemData = [
-                    'offer_id' => $offerId,
-                    'description' => $item['description'],
-                    'quantity' => $item['quantity'],
-                    'unit_price' => $item['unit_price'],
-                    'total_price' => $item['quantity'] * $item['unit_price'],
-                ];
-                $offerItemModel->insert($itemData);
-            }
-
             $submissionModel->update($submissionId, ['status' => 'processed']);
-
             return redirect()->to('/admin/offer/view/' . $offerId)->with('success', 'Offerte succesvol aangemaakt');
         } else {
             return redirect()->back()->with('error', 'Fout bij het aanmaken van offerte');
@@ -111,7 +86,7 @@ class OfferController extends Controller
     public function generatePdf($id)
     {
         $offerModel = new OfferModel();
-        $offer = $offerModel->getWithItems($id);
+        $offer = $offerModel->find($id);
 
         if (!$offer) {
             return redirect()->to('/admin/offers')->with('error', 'Offerte niet gevonden');
