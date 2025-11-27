@@ -17,7 +17,8 @@ class OfferModel extends Model
         'client_postcode', 'client_city', 'client_email', 'client_phone',
         'project_address', 'building_type', 'research_area', 'research_purpose',
         'number_of_analyses', 'extra_options', 'subtotal', 'btw_percentage',
-        'btw_amount', 'total_amount', 'status', 'pdf_path', 'fixed_price', 'tarief_description'
+        'btw_amount', 'total_amount', 'status', 'pdf_path', 'fixed_price',
+        'tarief_description', 'client_response_token', 'client_response_at'
     ];
 
     protected bool $allowEmptyInserts = false;

@@ -35,6 +35,8 @@ class PdfService
             'research_purpose' => $offer['research_purpose'],
             'fixed_price' => $offer['fixed_price'],
             'tarief_description' => $offer['tarief_description'],
+            'number_of_analyses' => $offer['number_of_analyses'] ?? null,
+            'extra_options' => $offer['extra_options'] ?? null,
         ];
 
         $html = view('pdf/offer_template', $data);

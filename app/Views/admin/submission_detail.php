@@ -6,6 +6,26 @@
     <h2>Inzending Details</h2>
     <div class="header-actions">
         <a href="<?= base_url('admin/submissions') ?>" class="btn btn-secondary">Terug</a>
+        <a href="<?= base_url('admin/submission/edit/' . $submission['id']) ?>" class="btn btn-secondary">Bewerken</a>
+        <form action="<?= base_url('admin/submission/copy/' . $submission['id']) ?>" method="post" class="inline-form">
+            <?= csrf_field() ?>
+            <button type="submit" class="btn btn-info">Kopieer</button>
+        </form>
+        <?php if ($submission['status'] !== 'archived'): ?>
+            <form action="<?= base_url('admin/submission/archive/' . $submission['id']) ?>" method="post" class="inline-form" onsubmit="return confirm('Inzending archiveren?');">
+                <?= csrf_field() ?>
+                <button type="submit" class="btn btn-warning">Archiveer</button>
+            </form>
+        <?php else: ?>
+            <form action="<?= base_url('admin/submission/restore/' . $submission['id']) ?>" method="post" class="inline-form">
+                <?= csrf_field() ?>
+                <button type="submit" class="btn btn-success">Herstel</button>
+            </form>
+        <?php endif ?>
+        <form action="<?= base_url('admin/submission/delete/' . $submission['id']) ?>" method="post" class="inline-form" onsubmit="return confirm('Definitief verwijderen?');">
+            <?= csrf_field() ?>
+            <button type="submit" class="btn btn-danger">Verwijder</button>
+        </form>
         <?php if (!$offer): ?>
             <a href="<?= base_url('admin/offer/create/' . $submission['id']) ?>" class="btn btn-primary">Offerte Aanmaken</a>
         <?php else: ?>
@@ -57,7 +77,7 @@
         </div>
         <div class="detail-item">
             <label>Aantal Analyses</label>
-            <p><?= $submission['aantal_analyses'] ?></p>
+            <p><?= $submission['aantal_analyses'] ?? '-' ?></p>
         </div>
         <div class="detail-item full-width">
             <label>Onderzoeksgebied</label>

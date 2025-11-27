@@ -30,15 +30,37 @@
                         <td><?= esc($submission['email']) ?></td>
                         <td><?= esc($submission['telefoonnummer']) ?></td>
                         <td><?= esc($submission['type_gebouw']) ?></td>
-                        <td><?= $submission['aantal_analyses'] ?></td>
+                        <td><?= $submission['aantal_analyses'] ?? '-' ?></td>
                         <td>
-                            <span class="badge badge-<?= $submission['status'] == 'pending' ? 'warning' : ($submission['status'] == 'processed' ? 'success' : 'secondary') ?>">
-                                <?= ucfirst($submission['status']) ?>
+                            <?php
+                                $badgeMap = [
+                                    'pending' => 'warning',
+                                    'processed' => 'success',
+                                    'archived' => 'secondary',
+                                ];
+                                $status = $submission['status'] ?? 'pending';
+                                $badgeClass = $badgeMap[$status] ?? 'secondary';
+                            ?>
+                            <span class="badge badge-<?= $badgeClass ?>">
+                                <?= ucfirst($status) ?>
                             </span>
                         </td>
                         <td><?= date('d-m-Y H:i', strtotime($submission['created_at'])) ?></td>
-                        <td>
+                        <td class="table-actions">
                             <a href="<?= base_url('admin/submission/view/' . $submission['id']) ?>" class="btn btn-sm btn-primary">Bekijken</a>
+                            <a href="<?= base_url('admin/submission/edit/' . $submission['id']) ?>" class="btn btn-sm btn-secondary">Bewerken</a>
+                            <form action="<?= base_url('admin/submission/copy/' . $submission['id']) ?>" method="post" class="inline-form">
+                                <?= csrf_field() ?>
+                                <button type="submit" class="btn btn-sm btn-info">Kopiëren</button>
+                            </form>
+                            <form action="<?= base_url('admin/submission/archive/' . $submission['id']) ?>" method="post" class="inline-form" onsubmit="return confirm('Weet u zeker dat u deze inzending wilt archiveren?');">
+                                <?= csrf_field() ?>
+                                <button type="submit" class="btn btn-sm btn-warning">Archiveren</button>
+                            </form>
+                            <form action="<?= base_url('admin/submission/delete/' . $submission['id']) ?>" method="post" class="inline-form" onsubmit="return confirm('Definitief verwijderen? Deze actie kan niet ongedaan gemaakt worden.');">
+                                <?= csrf_field() ?>
+                                <button type="submit" class="btn btn-sm btn-danger">Verwijderen</button>
+                            </form>
                         </td>
                     </tr>
                 <?php endforeach ?>

@@ -14,7 +14,8 @@ class FormSubmissionModel extends Model
     protected $protectFields = true;
     protected $allowedFields = [
         'naam', 'adres', 'postcode', 'woonplaats', 'email', 'telefoonnummer',
-        'project_adres', 'type_gebouw', 'onderzoeksgebied', 'doel_onderzoek', 'status'
+        'project_adres', 'type_gebouw', 'onderzoeksgebied', 'doel_onderzoek',
+        'aantal_analyses', 'extra_opties', 'status'
     ];
 
     protected bool $allowEmptyInserts = false;
@@ -40,6 +41,8 @@ class FormSubmissionModel extends Model
         'type_gebouw' => 'required|max_length[100]',
         'onderzoeksgebied' => 'permit_empty',
         'doel_onderzoek' => 'required',
+        'aantal_analyses' => 'permit_empty|integer',
+        'extra_opties' => 'permit_empty',
     ];
     protected $validationMessages = [];
     protected $skipValidation = false;

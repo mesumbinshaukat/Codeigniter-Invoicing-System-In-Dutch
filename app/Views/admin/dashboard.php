@@ -39,6 +39,18 @@
             <p class="stat-number"><?= $total_offers ?></p>
         </div>
     </div>
+
+    <div class="stat-card">
+        <div class="stat-icon" style="background: #ecfccb;">
+            <svg width="32" height="32" viewBox="0 0 20 20" fill="#65a30d">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.707a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+            </svg>
+        </div>
+        <div class="stat-content">
+            <h3>Geaccepteerde Offertes</h3>
+            <p class="stat-number"><?= $accepted_offers ?></p>
+        </div>
+    </div>
 </div>
 
 <div class="recent-section">
@@ -63,8 +75,17 @@
                             <td><?= esc($submission['email']) ?></td>
                             <td><?= esc($submission['type_gebouw']) ?></td>
                             <td>
-                                <span class="badge badge-<?= $submission['status'] == 'pending' ? 'warning' : 'success' ?>">
-                                    <?= ucfirst($submission['status']) ?>
+                                <?php
+                                    $submissionBadgeMap = [
+                                        'pending' => 'warning',
+                                        'processed' => 'success',
+                                        'archived' => 'secondary',
+                                    ];
+                                    $status = $submission['status'] ?? 'pending';
+                                    $badgeClass = $submissionBadgeMap[$status] ?? 'secondary';
+                                ?>
+                                <span class="badge badge-<?= $badgeClass ?>">
+                                    <?= ucfirst($status) ?>
                                 </span>
                             </td>
                             <td><?= date('d-m-Y H:i', strtotime($submission['created_at'])) ?></td>

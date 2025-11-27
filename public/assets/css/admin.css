@@ -548,6 +548,45 @@ body {
     background: #2563eb;
 }
 
+.btn-warning {
+    background: #fbbf24;
+    color: #78350f;
+}
+
+.btn-warning:hover {
+    background: #f59e0b;
+}
+
+.btn-danger {
+    background: #ef4444;
+    color: white;
+}
+
+.btn-danger:hover {
+    background: #dc2626;
+}
+
+.inline-form {
+    display: inline-block;
+    margin: 0 0.25rem;
+}
+
+.inline-form button {
+    display: inline-flex;
+    align-items: center;
+}
+
+.table-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+}
+
+.table-actions .btn,
+.table-actions button {
+    min-width: 90px;
+}
+
 @media (max-width: 1024px) {
     .sidebar {
         width: 240px;

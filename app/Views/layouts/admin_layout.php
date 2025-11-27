@@ -26,6 +26,12 @@
                     </svg>
                     Inzendingen
                 </a>
+                <a href="<?= base_url('admin/submissions/archive') ?>" class="nav-item <?= uri_string() == 'admin/submissions/archive' ? 'active' : '' ?>">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M3 5a2 2 0 012-2h10a2 2 0 012 2v1h-1v9a2 2 0 01-2 2H6a2 2 0 01-2-2V6H3V5zm3 1v9h8V6H6zm1 2h6v2H7V8z" clip-rule="evenodd"/>
+                    </svg>
+                    Archief
+                </a>
                 <a href="<?= base_url('admin/offers') ?>" class="nav-item <?= uri_string() == 'admin/offers' ? 'active' : '' ?>">
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clip-rule="evenodd"/>
